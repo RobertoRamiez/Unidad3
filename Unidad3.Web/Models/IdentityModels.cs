@@ -29,5 +29,8 @@ namespace Unidad3.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<New> Novedades { get; set; }
     }
 }
