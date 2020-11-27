@@ -10,8 +10,10 @@ namespace Unidad3.Web.Models
     public class New
     {
         public int Id { get; set; }
-        
+
+        public string ApplicationUser { get; set; }
         [Display(Name ="Desarrollador")]
+        [ForeignKey("ApplicationUser")]
         public ApplicationUser Desarrollador { get; set; }
         
         [Display(Name ="Fecha de lanzmiento")]
@@ -21,6 +23,8 @@ namespace Unidad3.Web.Models
         public int GenreId { get; set; }
 
         [ForeignKey("GenreId")]
+        [Display(Name ="Genero")]
         public Genre Genere { get; set; }
+
     }
 }

@@ -11,100 +11,112 @@ using Unidad3.Web.Models;
 namespace Unidad3.Web.Controllers
 {
     [Authorize]
-    public class GenresController : Controller
+    public class NewsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Genres
+        // GET: News
         public ActionResult Index()
         {
-            return View(db.Genres.ToList());
+            var novedades = db.Novedades.Include(a => a.Genere);
+            return View(novedades.ToList());
         }
 
-        // GET: Genres/Details/5
+        // GET: News/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genre genre = db.Genres.Include(a => a.News).Where(a=>a.Id==id).SingleOrDefault();
-            if (genre == null)
+            New @new = db.Novedades.Find(id);
+            if (@new == null)
             {
                 return HttpNotFound();
             }
-            return View(genre);
+            return View(@new);
         }
 
-        // POST: Genres/Create
+        // GET: News/Create
+        public ActionResult Create()
+        {
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre");
+            return View();
+        }
+
+        // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Genre genre)
+        public ActionResult Create([Bind(Include = "Id,DateTime,GenreId")] New @new)
         {
             if (ModelState.IsValid)
             {
-                db.Genres.Add(genre);
+                db.Novedades.Add(@new);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(genre);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.GenreId);
+            return View(@new);
         }
 
-        // GET: Genres/Edit/5
+        // GET: News/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genre genre = db.Genres.Find(id);
-            if (genre == null)
+            New @new = db.Novedades.Find(id);
+            if (@new == null)
             {
                 return HttpNotFound();
             }
-            return View(genre);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.GenreId);
+            return View(@new);
         }
 
-        // POST: Genres/Edit/5
+        // POST: News/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre")] Genre genre)
+        public ActionResult Edit([Bind(Include = "Id,DateTime,GenreId")] New @new)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(genre).State = EntityState.Modified;
+                db.Entry(@new).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(genre);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.GenreId);
+            return View(@new);
         }
 
-        // GET: Genres/Delete/5
+        // GET: News/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genre genre = db.Genres.Find(id);
-            if (genre == null)
+            New @new = db.Novedades.Find(id);
+            if (@new == null)
             {
                 return HttpNotFound();
             }
-            return View(genre);
+            return View(@new);
         }
 
-        // POST: Genres/Delete/5
-
+        // POST: News/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Genre genre = db.Genres.Find(id);
-            db.Genres.Remove(genre);
+            New @new = db.Novedades.Find(id);
+            db.Novedades.Remove(@new);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

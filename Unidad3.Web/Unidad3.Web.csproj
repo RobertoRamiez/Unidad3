@@ -173,6 +173,7 @@
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +184,10 @@
     <Compile Include="Migrations\202011251553234_StartProject1.cs" />
     <Compile Include="Migrations\202011251553234_StartProject1.Designer.cs">
       <DependentUpon>202011251553234_StartProject1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011270157219_UpdateUser.cs" />
+    <Compile Include="Migrations\202011270157219_UpdateUser.Designer.cs">
+      <DependentUpon>202011270157219_UpdateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -354,11 +359,15 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Genres\Create.cshtml" />
     <Content Include="Views\Genres\Delete.cshtml" />
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -384,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011251553234_StartProject1.resx">
       <DependentUpon>202011251553234_StartProject1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011270157219_UpdateUser.resx">
+      <DependentUpon>202011270157219_UpdateUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
