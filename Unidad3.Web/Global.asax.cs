@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Unidad3.Web.Clase;
 
 namespace Unidad3.Web
 {
@@ -16,6 +17,13 @@ namespace Unidad3.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            this.CheckRoles();
+        }
+
+        private void CheckRoles()
+        {
+            Utility.CheckRoles("Administrator");
+            Utility.CheckRoles("Nobody");
         }
     }
 }

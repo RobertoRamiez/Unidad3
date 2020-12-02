@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row justify-content-around mt-3">
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Generos</h5>
+            <p class="card-text">Da click al boton para visitar los generos.</p>
+            <a href="@Url.Action("Index","Genres")" class="btn btn-primary">Visitar</a>
+        </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Novedades</h5>
+            <p class="card-text">Aqui se encuentra el material mas nuevo</p>
+            <a href="@Url.Action("Index","News")" class="btn btn-primary">Visitar</a>
+        </div>
+    </div>
+</div>
