@@ -18,12 +18,14 @@ namespace Unidad3.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             this.CheckRoles();
+            Utility.CheckSuperUser();
         }
 
         private void CheckRoles()
         {
             Utility.CheckRoles("Administrator");
             Utility.CheckRoles("Nobody");
+            Utility.CheckRoles("UsuarioX");
         }
     }
 }

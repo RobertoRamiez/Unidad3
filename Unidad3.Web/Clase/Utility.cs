@@ -20,5 +20,35 @@ namespace Unidad3.Web.Clase
                 role.Create(new IdentityRole(rol));
             }
         }
+
+        internal static void CheckSuperUser()
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var user = userManager.FindByName("superuser@mail.com");
+            if (user==null)
+            {
+                CreateSuperUser("superuser@mail.com", "admin123", null, "Administrator");
+            }
+
+        }
+
+        private static void CreateSuperUser(string email, string password, string phone, string rol)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var user = new ApplicationUser()
+            {
+                UserName = email,
+                Email = email,
+                PhoneNumber = phone
+            };
+
+            userManager.Create(user, password);
+            userManager.AddToRole(user.Id, rol);
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }
