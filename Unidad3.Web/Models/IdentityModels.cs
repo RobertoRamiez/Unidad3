@@ -16,6 +16,13 @@ namespace Unidad3.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Hobbies { get; set; }
+        public string Favorites { get; set; }
+        public string Videos { get; set; }
+        public string Picture { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
