@@ -8,7 +8,7 @@
     <div class="col-md-10">
         <div class="card">
             <div class="card-header">
-                <h4 class="m-0 text-center bg-primary text-white">
+                <h4 class="m-0 text-center text-black">
                     Perfil de @User.Identity.Name
                 </h4>
             </div>
@@ -16,16 +16,21 @@
                 <div class="row justify-content-between">
                     <div class="col-md-6">
                         <div class="card">
-                            <img src="~/Content/img/farcry3.jpg" alt="Picture" class="rounded img-fluid"/>
+                            <img src="~/Update/@Model.Picture" alt="Picture" class="rounded img-fluid"/>
+                            <form class="form-horizontal" action="@Url.Action("Picture","Profile")" method="post" enctype="multipart/form-data">
+                                <input class="form-control" type="file" value="" name="pic"/>
+                                <input class="form-control" type="submit" value="Guardar Foto" />
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header py-2 bg-primary">
-                                <p class="text-center m-0 text-white">Informacion Principal</p> <button class="btn btn-secondary float-right">Editar</button>
+                                <p class="text-center m-0 text-white">Informacion Principal</p> 
+                                <button class="btn btn-secondary float-right">Editar</button>
                             </div>
                             <div class="card-body">
-                                <table class="table table-borderless table-sm table-striped">
+                                <table class="table table-sm table-striped">
                                     <tr>
                                         <td>Nombre</td>
                                         <td>@Model.Name</td>
@@ -68,6 +73,39 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar perfil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("Details","Profile")" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" value="" name="Name" placeholder="Tu nombre aqui" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" value="" name="PhoneNumber" placeholder="Tu telefono aqui" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
