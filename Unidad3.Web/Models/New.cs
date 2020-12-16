@@ -26,5 +26,6 @@ namespace Unidad3.Web.Models
         [Display(Name ="Genero")]
         public Genre Genere { get; set; }
 
+        public string Photo { get; set; }
     }
 }

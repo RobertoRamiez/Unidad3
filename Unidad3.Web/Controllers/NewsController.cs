@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,10 +50,22 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DateTime,GenreId")] New @new)
+        public ActionResult Create(New @new, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                string path = Server.MapPath("~/Update/Novedad/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                if (file != null)
+                {
+                    file.SaveAs(path + file.FileName);
+                    @new.Photo = file.FileName;
+                }
+
                 db.Novedades.Add(@new);
                 db.SaveChanges();
                 return RedirectToAction("Index");
