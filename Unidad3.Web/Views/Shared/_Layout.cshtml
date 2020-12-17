@@ -21,6 +21,7 @@
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item"><a href="@Url.Action("Index","Genres")" class="nav-link">Genero</a></li>
@@ -32,7 +33,6 @@
                     <li class="nav-item"><a href="@Url.Action("Index","Roles")" class="nav-link">Roles</a></li>
 
                 }
-
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

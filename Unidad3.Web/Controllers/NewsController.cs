@@ -11,7 +11,6 @@ using Unidad3.Web.Models;
 
 namespace Unidad3.Web.Controllers
 {
-    [Authorize]
     public class NewsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -30,7 +29,9 @@ namespace Unidad3.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.Novedades.Find(id);
+            New @new = db.Novedades.Include(a => a.Genere).
+                Include(a => a.Desarrollador).Where(a => a.Id == id).
+                SingleOrDefault();
             if (@new == null)
             {
                 return HttpNotFound();
@@ -39,6 +40,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre");
@@ -50,6 +52,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(New @new, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
@@ -76,6 +79,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,DateTime,GenreId")] New @new)
         {
             if (ModelState.IsValid)
@@ -109,6 +114,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
