@@ -7,13 +7,13 @@ namespace Unidad3.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class StartProject1 : IMigrationMetadata
+    public sealed partial class Current : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(StartProject1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Current));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011251553234_StartProject1"; }
+            get { return "202012180438496_Current"; }
         }
         
         string IMigrationMetadata.Source

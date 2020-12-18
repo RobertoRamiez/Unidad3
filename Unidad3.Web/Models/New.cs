@@ -11,21 +11,16 @@ namespace Unidad3.Web.Models
     {
         public int Id { get; set; }
 
-        public string ApplicationUser { get; set; }
-        [Display(Name ="Desarrollador")]
-        [ForeignKey("ApplicationUser")]
-        public ApplicationUser Desarrollador { get; set; }
+        public int DeveloperId { get; set; }
+        [ForeignKey("DeveloperId")]
+        public Developer Desarrollador { get; set; }
         
         [Display(Name ="Fecha de lanzmiento")]
         public DateTime DateTime { get; set; }
-        
-        [Display(Name ="Genero")]
-        public int GenreId { get; set; }
-
-        [ForeignKey("GenreId")]
-        [Display(Name ="Genero")]
-        public Genre Genere { get; set; }
 
         public string Photo { get; set; }
+
+        [Display(Name = "Titulo")]
+        public string Titulo { get; set; }
     }
 }

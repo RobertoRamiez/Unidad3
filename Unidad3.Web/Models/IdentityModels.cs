@@ -39,5 +39,6 @@ namespace Unidad3.Web.Models
 
         public DbSet<Genre> Genres { get; set; }
         public DbSet<New> Novedades { get; set; }
+        public DbSet<Developer> Desarrolladores { get; set; }
     }
 }

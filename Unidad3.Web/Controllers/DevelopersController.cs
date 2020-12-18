@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,132 +10,112 @@ using Unidad3.Web.Models;
 
 namespace Unidad3.Web.Controllers
 {
-    public class NewsController : Controller
+    public class DevelopersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: News
+        // GET: Developers
         public ActionResult Index()
         {
-            var novedades = db.Novedades.Include(a => a.Desarrollador);
-            return View(novedades.ToList());
+            var desarrolladores = db.Desarrolladores.Include(d => d.Genre);
+            return View(desarrolladores.ToList());
         }
 
-        // GET: News/Details/5
+        // GET: Developers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.Novedades.Include(a => a.Desarrollador.Genre).
-                Include(a => a.Desarrollador).Where(a => a.Id == id).
-                SingleOrDefault();
-            if (@new == null)
+            Developer developer = db.Desarrolladores.Find(id);
+            if (developer == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(developer);
         }
 
-        // GET: News/Create
-        [Authorize]
+        // GET: Developers/Create
         public ActionResult Create()
         {
-            ViewBag.User = db.Desarrolladores.ToList();
-            ViewBag.Genre = db.Genres.ToList();
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre");
             return View();
         }
 
-        // POST: News/Create
+        // POST: Developers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create(New @new, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Name,GenreId,Phone,Email,Contact")] Developer developer)
         {
             if (ModelState.IsValid)
             {
-                string path = Server.MapPath("~/Update/Novedad/");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                if (file != null)
-                {
-                    file.SaveAs(path + file.FileName);
-                    @new.Photo = file.FileName;
-                }
-
-                db.Novedades.Add(@new);
+                db.Desarrolladores.Add(developer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.Desarrollador);
-            return View(@new);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", developer.GenreId);
+            return View(developer);
         }
 
-        // GET: News/Edit/5
-        [Authorize]
+        // GET: Developers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.Novedades.Find(id);
-            if (@new == null)
+            Developer developer = db.Desarrolladores.Find(id);
+            if (developer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.DeveloperId);
-            return View(@new);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", developer.GenreId);
+            return View(developer);
         }
 
-        // POST: News/Edit/5
+        // POST: Developers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,DateTime,GenreId")] New @new)
+        public ActionResult Edit([Bind(Include = "Id,Name,GenreId,Phone,Email,Contact")] Developer developer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@new).State = EntityState.Modified;
+                db.Entry(developer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", @new.DeveloperId);
-            return View(@new);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre", developer.GenreId);
+            return View(developer);
         }
 
-        // GET: News/Delete/5
-        [Authorize]
+        // GET: Developers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.Novedades.Find(id);
-            if (@new == null)
+            Developer developer = db.Desarrolladores.Find(id);
+            if (developer == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(developer);
         }
 
-        // POST: News/Delete/5
+        // POST: Developers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            New @new = db.Novedades.Find(id);
-            db.Novedades.Remove(@new);
+            Developer developer = db.Desarrolladores.Find(id);
+            db.Desarrolladores.Remove(developer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

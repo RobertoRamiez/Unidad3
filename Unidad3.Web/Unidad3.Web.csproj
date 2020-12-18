@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Clase\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DevelopersController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -181,28 +182,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011242240395_StartProject.cs" />
-    <Compile Include="Migrations\202011242240395_StartProject.Designer.cs">
-      <DependentUpon>202011242240395_StartProject.cs</DependentUpon>
+    <Compile Include="Migrations\202012180436381_InitialCreate.cs" />
+    <Compile Include="Migrations\202012180436381_InitialCreate.Designer.cs">
+      <DependentUpon>202012180436381_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011251553234_StartProject1.cs" />
-    <Compile Include="Migrations\202011251553234_StartProject1.Designer.cs">
-      <DependentUpon>202011251553234_StartProject1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011270157219_UpdateUser.cs" />
-    <Compile Include="Migrations\202011270157219_UpdateUser.Designer.cs">
-      <DependentUpon>202011270157219_UpdateUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012040056180_MakeProfile.cs" />
-    <Compile Include="Migrations\202012040056180_MakeProfile.Designer.cs">
-      <DependentUpon>202012040056180_MakeProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012180009245_Arreglo.cs" />
-    <Compile Include="Migrations\202012180009245_Arreglo.Designer.cs">
-      <DependentUpon>202012180009245_Arreglo.cs</DependentUpon>
+    <Compile Include="Migrations\202012180438496_Current.cs" />
+    <Compile Include="Migrations\202012180438496_Current.Designer.cs">
+      <DependentUpon>202012180438496_Current.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Developer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -392,6 +382,13 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\AddRoles.cshtml" />
     <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Developers\Create.cshtml" />
+    <Content Include="Views\Developers\Delete.cshtml" />
+    <Content Include="Views\Developers\Details.cshtml" />
+    <Content Include="Views\Developers\Edit.cshtml" />
+    <Content Include="Views\Developers\Index.cshtml" />
+    <Content Include="Views\Principal\_AdminView.cshtml" />
+    <Content Include="Views\Principal\_UsuarioXView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -413,20 +410,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011242240395_StartProject.resx">
-      <DependentUpon>202011242240395_StartProject.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012180436381_InitialCreate.resx">
+      <DependentUpon>202012180436381_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011251553234_StartProject1.resx">
-      <DependentUpon>202011251553234_StartProject1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011270157219_UpdateUser.resx">
-      <DependentUpon>202011270157219_UpdateUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012040056180_MakeProfile.resx">
-      <DependentUpon>202012040056180_MakeProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012180009245_Arreglo.resx">
-      <DependentUpon>202012180009245_Arreglo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012180438496_Current.resx">
+      <DependentUpon>202012180438496_Current.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

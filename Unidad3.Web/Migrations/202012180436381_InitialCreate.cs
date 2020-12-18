@@ -3,10 +3,51 @@ namespace Unidad3.Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class StartProject : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Developers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        GenreId = c.Int(nullable: false),
+                        Phone = c.String(),
+                        Email = c.String(),
+                        Contact = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Genres", t => t.GenreId, cascadeDelete: true)
+                .Index(t => t.GenreId);
+            
+            CreateTable(
+                "dbo.Genres",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(nullable: false, maxLength: 100),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.News",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DeveloperId = c.Int(nullable: false),
+                        DateTime = c.DateTime(nullable: false),
+                        Photo = c.String(),
+                        Titulo = c.String(),
+                        Genre_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Developers", t => t.DeveloperId, cascadeDelete: true)
+                .ForeignKey("dbo.Genres", t => t.Genre_Id)
+                .Index(t => t.DeveloperId)
+                .Index(t => t.Genre_Id);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -35,6 +76,12 @@ namespace Unidad3.Web.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Hobbies = c.String(),
+                        Favorites = c.String(),
+                        Videos = c.String(),
+                        Picture = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -83,17 +130,26 @@ namespace Unidad3.Web.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Developers", "GenreId", "dbo.Genres");
+            DropForeignKey("dbo.News", "Genre_Id", "dbo.Genres");
+            DropForeignKey("dbo.News", "DeveloperId", "dbo.Developers");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.News", new[] { "Genre_Id" });
+            DropIndex("dbo.News", new[] { "DeveloperId" });
+            DropIndex("dbo.Developers", new[] { "GenreId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.News");
+            DropTable("dbo.Genres");
+            DropTable("dbo.Developers");
         }
     }
 }
