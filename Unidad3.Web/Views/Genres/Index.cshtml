@@ -34,9 +34,9 @@
                                 @Html.DisplayFor(modelItem => item.Nombre)
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "Genres", new { id = item.Id })" title="Editar" class="btn btn-sm btn-warning rounded"><i class="fas fa-pencil text-white"></i></a>
+                                <a href="@Url.Action("Edit", "Genres", new { id = item.Id })" title="Editar" class="btn btn-sm btn-warning rounded"><i class="fas fa-edit text-white"></i></a>
                                 <a href="@Url.Action("Details", "Genres", new { id = item.Id })" title="Ver" class="btn btn-sm btn-primary rounded"><i class="fas fa-eye text-white"></i></a>
-                                <a href="@Url.Action("DeleteConfirmed","Genres", new { id= item.Id})" title="Eliminar" class="btn btn-sm btn-danger"><i class="fas fa-eye-trash text-white"></i></a>
+                                <a href="@Url.Action("DeleteConfirmed","Genres", new { id= item.Id})" title="Eliminar" class="btn btn-sm btn-danger"><i class="fas fa-trash text-white"></i></a>
                             </td>
                         </tr>
                     }
