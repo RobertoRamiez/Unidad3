@@ -31,11 +31,13 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.DeveloperId, "GenreId", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Genre", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.DeveloperId, "", new { @class = "text-danger" })
-        </div>
+        <label class="col-md-6">Desarrolladores</label>
+        <select name="DeveloperId" id="" class="form-control">
+            <option value="">Elige un desarrolador</option>
+            @foreach(var item in ViewBag.User){
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
     </div>
 
     <div>

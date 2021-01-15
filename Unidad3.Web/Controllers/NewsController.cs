@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -44,7 +44,6 @@ namespace Unidad3.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.User = db.Desarrolladores.ToList();
-            ViewBag.Genre = db.Genres.ToList();
             return View();
         }
 
