@@ -40,7 +40,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Create
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.User = db.Desarrolladores.ToList();
@@ -52,7 +52,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(New @new, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
@@ -79,7 +79,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,7 +100,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,DateTime,GenreId")] New @new)
         {
             if (ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: News/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

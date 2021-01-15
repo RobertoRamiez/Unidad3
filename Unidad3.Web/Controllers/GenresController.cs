@@ -41,6 +41,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(Genre genre)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: Genres/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +75,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Nombre")] Genre genre)
         {
             if (ModelState.IsValid)
@@ -85,6 +88,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: Genres/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

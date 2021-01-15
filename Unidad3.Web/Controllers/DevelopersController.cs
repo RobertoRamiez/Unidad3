@@ -37,6 +37,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: Developers/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.GenreId = new SelectList(db.Genres, "Id", "Nombre");
@@ -48,6 +49,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Name,GenreId,Phone,Email,Contact")] Developer developer)
         {
             if (ModelState.IsValid)
@@ -62,6 +64,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: Developers/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace Unidad3.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name,GenreId,Phone,Email,Contact")] Developer developer)
         {
             if (ModelState.IsValid)
@@ -95,6 +99,7 @@ namespace Unidad3.Web.Controllers
         }
 
         // GET: Developers/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
